@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
 
-final formatter = DateFormat.yMd();
+final formatter = DateFormat('dd-MM-yyyy')  /**DateFormat.yMd()*/;
 const uuid = Uuid();
 
 enum Category { food, travel, leisure, work }
@@ -34,5 +34,5 @@ class Expense {
   String get formattedDate{
     return formatter.format(date);
   }
-
+  
 }
