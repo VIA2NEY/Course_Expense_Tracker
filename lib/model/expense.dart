@@ -36,3 +36,34 @@ class Expense {
   }
   
 }
+
+
+class ExpenseBucket {
+
+  const ExpenseBucket({
+    required this.category,
+    required this.expenses
+  });
+
+  // filtrer les dépenses de allExpense dont la category correspond à la catégorie fournie. La méthode toList convertit ensuite le résultat en une liste.
+  ExpenseBucket.forCategory(List<Expense> allExpense, this.category) 
+    : expenses = allExpense                                   // le `:` initialise les depenses de `List<Expense> expenses` de la classe ExpenseBucket, egale a `List<Expense> allExpense` qu'on a dans mon .forCategory()
+      .where((oneExpense) => oneExpense.category == category) // Et on vas filtre pour chaque depenses la categories qui a ete mis ici this.category
+      .toList();
+
+
+
+  final Category category;
+  final List<Expense> expenses;
+
+  double get totalExpenses {
+    double sum = 0;
+
+    for (final eachExpense in expenses) {
+      sum = sum + eachExpense.amount; // autre facon de l'ecrire sum =+ eachExpense.amount
+    }
+
+    return sum;
+  }
+
+}

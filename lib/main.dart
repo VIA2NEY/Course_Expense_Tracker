@@ -53,7 +53,8 @@ void main() {
           )
         ),
       ),
-      themeMode: ThemeMode.system, // Use either the light or dark theme based on what the user has selected in the system settings
+      themeMode: ThemeMode.dark,
+      // themeMode: ThemeMode.system, // Use either the light or dark theme based on what the user has selected in the system settings
 
       home: Expenses(),
     ),
