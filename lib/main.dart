@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:expenses_tracker/widgets/expenses.dart';
+import 'package:flutter/services.dart';
 
 
 var kColorScheme = ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 96, 59, 181));
@@ -53,8 +54,7 @@ void main() {
           )
         ),
       ),
-      themeMode: ThemeMode.dark,
-      // themeMode: ThemeMode.system, // Use either the light or dark theme based on what the user has selected in the system settings
+      themeMode: ThemeMode.system, // Use either the light or dark theme based on what the user has selected in the system settings
 
       home: Expenses(),
     ),
