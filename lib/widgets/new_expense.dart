@@ -83,92 +83,100 @@ class _NewExpenseState extends State<NewExpense> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(16, 48, 16, 16),
-      child: Column(
-        children: [
 
-          TextField(
-            controller: _titleController,
-            maxLength: 50,
-            decoration: InputDecoration(label: Text('Title')),
-          ),
+    final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
 
-          Row(
+    return SizedBox(
+      height: double.infinity,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(16, 48, 16, keyboardSpace + 16),
+          child: Column(
             children: [
-              Expanded(
-                child: TextField(
-                  controller: _amountController,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    prefixText: 'Fcfa',
-                    label: Text('Montant')
-                  ),
-                ),
+        
+              TextField(
+                controller: _titleController,
+                maxLength: 50,
+                decoration: InputDecoration(label: Text('Title')),
               ),
-
-              SizedBox(width: 16,),
-
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text( 
-                      _selectedDate == null ? 'no date selected' : formatter.format(_selectedDate!)
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.calendar_month
+        
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _amountController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        prefixText: 'Fcfa',
+                        label: Text('Montant')
                       ),
-                      onPressed: _presentDatePicker,
+                    ),
+                  ),
+        
+                  SizedBox(width: 16,),
+        
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text( 
+                          _selectedDate == null ? 'no date selected' : formatter.format(_selectedDate!)
+                        ),
+                        IconButton(
+                          icon: Icon(
+                            Icons.calendar_month
+                          ),
+                          onPressed: _presentDatePicker,
+                        )
+                      ],
                     )
-                  ],
-                )
-              )
-            ],
-          ),
-
-          SizedBox(height: 15,),
-
-          Row(
-            children: [
-              DropdownButton(
-                value: _selectedCategory,
-                items: Category.values.map(
-                  (categori) => DropdownMenuItem(
-                    value: categori,
-                    child: Text(categori.name.toUpperCase())
                   )
-                ).toList(), 
-                onChanged: (value){
-                  if (value == null) {
-                    return;
-                  }
-                  setState(() {
-                    _selectedCategory = value;
-                  });
-                }
+                ],
               ),
-
-              Spacer(),
-
-              TextButton(
-                child: Text('Anuler'),
-                onPressed: (){
-                  Navigator.pop(context);
-                }, 
+        
+              SizedBox(height: 15,),
+        
+              Row(
+                children: [
+                  DropdownButton(
+                    value: _selectedCategory,
+                    items: Category.values.map(
+                      (categori) => DropdownMenuItem(
+                        value: categori,
+                        child: Text(categori.name.toUpperCase())
+                      )
+                    ).toList(), 
+                    onChanged: (value){
+                      if (value == null) {
+                        return;
+                      }
+                      setState(() {
+                        _selectedCategory = value;
+                      });
+                    }
+                  ),
+        
+                  Spacer(),
+        
+                  TextButton(
+                    child: Text('Anuler'),
+                    onPressed: (){
+                      Navigator.pop(context);
+                    }, 
+                  ),
+        
+                  ElevatedButton(
+                    child: Text('save Expense'),
+                    onPressed: _submitExpenseData, 
+                  )
+                ],
               ),
-
-              ElevatedButton(
-                child: Text('save Expense'),
-                onPressed: _submitExpenseData, 
-              )
+        
+              
             ],
           ),
-
-          
-        ],
+        ),
       ),
     );
   }
